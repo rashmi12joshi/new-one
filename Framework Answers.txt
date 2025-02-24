@@ -1,0 +1,256 @@
+What is scope in bean?
+===>In the Spring Framework, bean scope defines the lifecycle and visibility of a bean within the application context. 
+Spring supports several scopes for beans:
+Singleton (default): Only one instance of the bean is created and shared across the entire application. All requests for this bean return the same instance.
+Prototype: A new instance of the bean is created each time it is requested from the Spring container.
+Request: A new bean instance is created for each HTTP request. This scope is available only in a web application context.
+Session: A new bean instance is created for each HTTP session. This is also available only in a web application context.
+Global Session: A bean scope that is used for global HTTP sessions in a portlet context.
+Application: A single instance of the bean is created for the entire web application. It is used in a web application context.
+
+2.if we dont mention the scope then what will happen(https://docs.spring.io/spring-framework/docs/3.0.0.M3/reference/html/ch04s04.html)
+
+--> It will take scope as singleton bcz it is defualt in bean.Only one instance of the bean is created and shared throughout the entire Spring container. 
+Every request for this bean returns the same instance.This scope is useful when you want a single shared instance of the bean for the entire application.
+
+3.what is ref in term of bean reference
+
+--> ref refers to a reference to another bean within the Spring container. It is used to inject one bean into another by referring to the other bean's ID or name.
+When you define a bean in Spring, you can use the ref attribute to indicate that one bean should be injected into another bean.
+This is done by referring to the ID of the other bean, and it can be particularly useful when you want to wire multiple beans together.
+
+4. what is meaning of ' <property name="view" value="party/AddParty"></property>'
+-->The <property> tag in XML is used to inject a value into a bean's property.
+name="view" refers to the property being set, and value="party/AddParty" is the value being injected into that property.
+In the context of a web application, this could represent a view name or resource path used by a controller.
+
+5. wht is metadata and which metadata tables used
+-->In a database context, metadata refers to data that provides information about other data. Specifically, it describes the structurse, schema, 
+and relationships of the data stored in the database.In our framework we used the metadata table named as metadata_m.
+
+6.what is the significance of uimetadataproprty table
+---> Used to define the lookup,label n input for the attributes stored in metadata_m.
+
+7.what is propertycd and contextcd
+-->propertycd is used to define the property of the metadata_m attribute means what we are storing whether it is label, lookup,input else enabling the value.
+In terms of contextcd we define whether the attribute should access or display at the global else local context which we define at contextmaster table.
+
+8.what is lookupcd, labelkey, inputypecd
+
+---> labelkey --> provides label for attribute
+---> inputtypecd ---> provides the input field for attribute
+---> lookupcd ---> provide the values that gonna show in input type (means when it will be combo,fcombo,etc).
+
+
+9.what is lookupentityname, lookupfiltercriteria, lookupdatacodename.
+--->lookupentityname : classname of java file from where we can fetch the attribute.(LoockupEntityName)
+lookupfiltercriteria : it will fetch the values from lookupdata as per the given filter creatia.(loockupkey="")
+lookupdatacodename : it will provide the variable value from the class that we define in lookupentityname .(loockupdatacd) 
+
+10. What are custom tags, how & where to do we define, declare & use it? Open a tag handler and explain code
+
+-->Custom tags are typically used in Java-based web applications to encapsulate complex functionality into a simple tag that can be used in JSP files.
+ This allows developers to separate the business logic from the presentation layer, making code cleaner and more maintainable.
+
+The TLD file is used to define custom tags and their attributes. It is an XML file where the tag and its attributes are described.
+ The TLD file allows the JSP engine to recognize and properly handle the custom tag.(tld)
+
+Declare the TLD in the web.xml (Deployment Descriptor)
+To use custom tags in your JSP, you must declare the TLD file in the web.xml file of your web application.
+
+Add party.jsp
+<ui.Toolbar>
+
+<party:GetParty>---model tag
+
+<ui:formtag>---control tag
+
+17. which queries you have used in framework?
+==>Insert,Update,delete,fetch,joins.
+
+18. what will happen if data is available in 2 tables during join but not available in the 3rd table then what will be the result.
+-->
+1. INNER JOIN:
+SELECT *
+FROM table1 t1
+INNER JOIN table2 t2 ON t1.id = t2.id
+INNER JOIN table3 t3 ON t1.id = t3.id;
+
+2. LEFT JOIN
+SELECT *
+FROM table1 t1
+LEFT JOIN table2 t2 ON t1.id = t2.id
+LEFT JOIN table3 t3 ON t1.id = t3.id;
+
+3.RIGHT JOIN
+SELECT *
+FROM table1 t1
+RIGHT JOIN table2 t2 ON t1.id = t2.id
+RIGHT JOIN table3 t3 ON t1.id = t3.id;
+
+4.FULL JOIN 
+SELECT *
+FROM table1 t1
+FULL JOIN table2 t2 ON t1.id = t2.id
+FULL JOIN table3 t3 ON t1.id = t3.id;
+
+21.why we use f8.
+f10--step over start karto
+F8 is commonly used to resume execution of the program while stepping through the code. step in
+
+
+22. what is debugging.
+Debugging is the process of identifying, isolating, and fixing issues or "bugs" in software code. 
+Bugs are problems or errors that prevent the program from running correctly, producing the expected output, or functioning as intended.
+Debugging is a crucial part of the software development lifecycle.
+
+23. where to deploy the files
+standalone -->deployments
+
+32. How to create a new context / do you Know about CONTEXTMASTER table?
+==>yes ,2ways -->entity ,contextmaster-->by using ternary operator we create contextcd.
+
+34. How do you change input of a field from radio to combo?
+==>from uimetadata
+
+35. What is business common and systemcommmon solution in build ? (system common 
+-framework related part designed by company, new change business common)
+-systemcommon- framework wala code cant change.
+-buisness common-any framework related changes
+
+36. Which application server you are using ? version?
+=>jboss-7.1
+
+37. What are the different components on which you have worked during 
+training (JSP ,BOValidator,controller etc)?
+==>js,create party cntroller
+
+38.What panel tag will do?
+==>his seems to be a custom tag or component that defines a panel or container  for the address details. 
+The name="Address details" attribute suggests that this is the title or label for the panel.
+
+Addparty.jsp-->UI panel tag
+
+39. Data entry grid?
+==>addparty.jsp.-->give table like structure,in that we define col id col width.
+
+40. What is role of hbm file?
+==>It is used to link java and db table.
+
+41. One to many relationship in hbm (party and party address) show in file?
+==>PartyDO.hbm --->Bag tag ,in that one to many tags in that class name.
+
+[<bag name="listPartyIdentityDOList" cascade="all-delete-orphan" lazy="false" inverse="true">
+			<key column="PARTYSEQ"/>
+			<one-to-many class="com.c2lbiz.symbiosys.insurance.businesscommon.dataobjects.party.PartyIdentityDO"/>
+		</bag>		
+		<bag name="listPartyAddressDOList" cascade="all-delete-orphan" lazy="false" inverse="true">
+			<key column="PARTYSEQ"/>
+			<one-to-many class="com.c2lbiz.symbiosys.insurance.businesscommon.dataobjects.party.PartyAddressDO"/>
+		</bag>		]
+
+42. Full form of GUID-global unique identifier? How it is used? 
+(primary is unique for table GUID is unique for complete DB)
+==>To give GUID is very imp becoz sometimes when we want to fetch a field due to in appropriate GUID sometime data cannot be fetch and system crashes.
+So unique GUID should be given.
+
+43. Details on JSP page, Details of custom tag and its associated java file custom tag java code details
+==> <party:GetPartyContact>-- This are custom tag and in that java class name is given and from using this custom tag fetching and all take place. 
+
+44. There are model tag custom tag control tags
+==>model tag----------><party:GetPartyContact> getcontact madhun fetch details karun jsp module madhe show karnar.
+control tags----></ui:FormTag>
+
+45. Methods in controller, when those (init, fetch, process) methods will be used
+==>createPartyController.java--->tyat lihile ahe methods.
+
+46. What happens when you click search result attribute?
+==>Search result field can bee seen
+
+47. What is CRUD operation
+==>create,read,update,delete
+
+48. Why privileges are given to user ? complete tables to create menu? Why we enter 
+data in so many tables instead of creating menu directly?
+==>privileges are used to give features to menu.Configure karyla easy padta and controls the access. kami complex hota manun vegla table madhe lihila.
+
+50. Title gender task, Common script UI script use?
+==>Common script-UI script use func,load loockupdata,sel-->getselectedValue(); to get the function
+
+51. Log.debug, log.info, log.error?
+==>log.error- It is use to show error msg that happens due to some invalid data entries in our framework.
+Log.debug, 
+log.info-- genaral info 
+
+52. Breakpoint and debugging in JS
+==>
+
+53. Details of label and input tag java codes and other custom tag related java code on party screen
+==>
+
+74. what is .xml
+==>.xml stands for eXtensible Markup Language, and it's a widely-used format for storing and transporting data. XML is a text-based language that defines rules for encoding documents in a way that is both human-readable and machine-readable.
+
+77. what is Dependency injection
+==>war file download ke badd build path.
+
+
+23. where to deploy the files
+jboss-standalone.xml-deployments
+
+where to check logs-->deployment,log,server log.
+
+systemcommon- framework wala code cant change.
+buisness common-any framework related changes
+
+Init-->page load--eg Add party
+Fetch- data ko nikLtay--eg search
+Process-func to save karnee----eg save
+ 
+Log-->details we execute -->it is created when we run external bat  or in eclipse
+ 
+What is request to object?
+Request util--> request object to give data and save the object
+ 
+58. How partyBOValidation file is called ? where do you make entry?
+ In our workspace there is a xml file named party_business which act as a guidingfile for the application operation in that it is mention after BO layer control should go to partyBO_validator
+& and to call function written inside this file we make entry in validationmetadata_m table over their VALIDATIONCD = CUSTOM and VALIDATIONPARAM = {Function name}written in partyBO_validator. 
+
+
+minoccurs-->minimum number of time 
+
+label and loockupvalue alag kyuki low code ,no code.
+
+What is dependency injection --Dependency Injection (DI) is a design pattern used in object-oriented programming. It allows a class to have its dependencies (objects it works with) injected 
+into it rather than creating them internally. This decouples classes and makes the code more modular and easier to test.
+
+
+java debug:-Resume (F8):
+Step Over (F6),Step Into (F5),Step Return (F7)
+ 
+js debug:-Step Over (F10),Step Into (F11),Step Out (Shift + F11),f8
+
+
+
+<party:GetParty>-model tag
+<ui:ToolbarTag>-custom tag
+<ui:BodyTag>- controller
+
+
+ui-
+
+partyxsd--partyDO
+
+model tag-
+custom tag-
+control tag-
+
+
+
+
+partyvalidations,addParty.jsp,partyBoValidator
+
+
+
+
+
