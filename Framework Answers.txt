@@ -1,3 +1,4 @@
+edited
 What is scope in bean?
 ===>In the Spring Framework, bean scope defines the lifecycle and visibility of a bean within the application context. 
 Spring supports several scopes for beans:
